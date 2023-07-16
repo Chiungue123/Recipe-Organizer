@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  createRecipe: boolean = false;
 
+  onCreateRecipe() {
+    this.createRecipe = true;
+  }
 }
