@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-recipes',
@@ -7,19 +9,17 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./view-recipes.component.css']
 })
 export class ViewRecipesComponent implements OnInit {
+  
   recipes: Recipe[] = []
-  // Initialize a new recipe
-  newRecipe: Recipe = {
-    name: 'name',
-    description: 'description',
-    ingredients: ['ingredients', 'ingredients'],
-    instructions: 'instructions',
-  };
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
-    this.recipes.push(this.newRecipe);
+    this.recipeService.getRecipes().subscribe((recipes) => {
+      this.recipes = recipes;
+    },
+    (error) => {
+      alert("Error getting recipes from ngOnInit")
+      console.log(error);
+    });
   }
-  
-  constructor() { }
-
 }

@@ -6,9 +6,10 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeFavouritesComponent } from './recipe-favourites/recipe-favourites.component';
 import { ViewRecipesComponent } from './view-recipes/view-recipes.component';
 import { HomeComponent } from './home/home.component';
+import { RecipeService } from './recipe.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: HomeComponent },
   { path: 'recipe-form', component: RecipeFormComponent },
   { path: 'recipe-card', component: RecipeCardComponent },
   { path: 'recipe-detail', component: RecipeDetailComponent },

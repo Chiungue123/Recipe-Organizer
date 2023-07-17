@@ -1,1 +1,8 @@
 <p>recipe-form works!</p>
+<form (ngSubmit)="onSubmit()">
+    <p>Enter Recipe Name</p><input [(ngModel)]="name" name="name">
+    <p>Enter Recipe Description</p><input [(ngModel)]="description" name="description">
+    <p>Enter Recipe Ingredients</p><input [(ngModel)]="ingredients" name="ingredients">
+    <p>Enter Recipe Instructions</p><input [(ngModel)]="instructions" name="instructions">
+    <button type="submit">Submit</button>
+</form>
