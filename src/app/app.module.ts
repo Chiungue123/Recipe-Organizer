@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,9 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeFavouritesComponent } from './recipe-favourites/recipe-favourites.component';
 import { ViewRecipesComponent } from './view-recipes/view-recipes.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RecipeService } from './recipe.service';
+import { FormVisibilityService } from './form-visibility.service';
 
 
 
@@ -28,9 +31,11 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [RecipeService, FormVisibilityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,10 +16,30 @@
   "profile": {
     "name": "typicode"
   },
-    "recipes": {
-      "name": "name",
-      "description": "description",
-      "ingredients": ["ingredients", "ingredients"],
-      "instructions": "instructions"
+  "recipes": [
+    {
+      "name": "Recipe Name",
+      "ingredients": [
+        {
+          "name": "Ingredient 1",
+          "amount": "amount 1",
+          "unit": "grams"
+        },
+        {
+          "name": "Ingredient 2",
+          "amount": "tangerine",
+          "unit": "cups"
+        }
+      ],
+      "instructions": [
+        {
+          "description": "Instructons"
+        },
+        {
+          "description": "More instructions"
+        }
+      ],
+      "id": 1
     }
+  ]
 }

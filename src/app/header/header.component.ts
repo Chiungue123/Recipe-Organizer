@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormVisibilityService } from '../form-visibility.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  createRecipe: boolean = false;
+  constructor (private FormVisibilityService: FormVisibilityService) { }
 
-  onCreateRecipe() {
-    this.createRecipe = true;
+  onToggleForm() {
+    console.log("onToggleForm() called")
+    this.FormVisibilityService.toggleForm();
   }
 }

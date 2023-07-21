@@ -7,14 +7,15 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RecipeService {
-  private recipes: Recipe[] = [];
   constructor(private http: HttpClient) { }
 
   getRecipes(): Observable<Recipe[]> {
+    console.log("getRecipes() called with data");
     return this.http.get<Recipe[]>('http://localhost:3000/recipes');
   }
 
-  addRecipe(recipe: Recipe) {
-    this.http.post('http://localhost:3000/recipes', recipe);
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    console.log("addRecipe() called with data", recipe["name"], recipe["ingredients"], recipe["instructions"]);
+    return this.http.post<Recipe>('http://localhost:3000/recipes', recipe);
   }
 }

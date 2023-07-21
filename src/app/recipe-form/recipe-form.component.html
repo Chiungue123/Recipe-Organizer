@@ -1,8 +1,51 @@
-<p>recipe-form works!</p>
-<form (ngSubmit)="onSubmit()">
-    <p>Enter Recipe Name</p><input [(ngModel)]="name" name="name">
-    <p>Enter Recipe Description</p><input [(ngModel)]="description" name="description">
-    <p>Enter Recipe Ingredients</p><input [(ngModel)]="ingredients" name="ingredients">
-    <p>Enter Recipe Instructions</p><input [(ngModel)]="instructions" name="instructions">
-    <button type="submit">Submit</button>
-</form>
+<div class="background">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="viewport">
+        <div class="slides-container">
+            <div class="slide">
+                <h2>Recipe Name</h2>
+                <input formControlName="name" placeholder="e.g., pumpkin pie, etc...">
+                <button type="button" (click)="onNext()">Next</button>
+            </div>
+            <div class="slide">
+                <h2>Recipe Ingredients</h2>
+                <div formArrayName="ingredients">
+                    <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i">
+                        <hr *ngIf="ingredients.length > 1 && i > 0" class="separator">
+                        <p>Ingredient</p>
+                        <input formControlName="name">
+                        <p>Amount</p>
+                        <input formControlName="amount">
+                        <p>Unit</p>
+                        <select [ngStyle]="{'margin-bottom.px': 20}" formControlName="unit">
+                            <option *ngFor="let unit of units" [value]="unit">
+                                {{unit}}
+                            </option>
+                        </select>
+                        <button [ngStyle]="{'width.px': 120}" type="button" (click)="onRemoveIngredient(i)">Delete</button>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" (click)="onPrevious()">Previous</button>
+                    <button [ngStyle]="{'width.px': 185}" type="button" (click)="onAddIngredient()">Add Ingredient</button>
+                    <button type="button" (click)="onNext()">Next</button>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>Recipe Instructions</h2>
+                <div formArrayName="instructions">
+                    <div *ngFor="let instruction of instructions.controls; let i = index" [formGroupName]="i">
+                        <hr *ngIf="instructions.length > 1 && i > 0" class="separator">
+                        <p>Instruction</p>
+                        <input formControlName="description">
+                        <button [ngStyle]="{'width.px': 120}" type="button" (click)="onRemoveInstruction(i)">Delete</button>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" (click)="onPrevious()">Previous</button>
+                    <button [ngStyle]="{'width.px': 185}" type="button" (click)="onAddInstruction()">Add Instruction</button>
+                    <button [ngStyle]="{'width.px': 160}"type="submit">Create Recipe</button>
+                </div>
+            </div>         
+        </div>
+    </form>
+</div>
