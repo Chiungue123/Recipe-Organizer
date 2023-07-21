@@ -9,6 +9,11 @@ import { HttpClient } from '@angular/common/http';
 export class RecipeService {
   constructor(private http: HttpClient) { }
 
+  getRecipe(id: number): Observable<Recipe> {
+    console.log("getRecipe() called with data", id);
+    return this.http.get<Recipe>(`http://localhost:3000/recipes/${id}`);
+  }
+
   getRecipes(): Observable<Recipe[]> {
     console.log("getRecipes() called with data");
     return this.http.get<Recipe[]>('http://localhost:3000/recipes');

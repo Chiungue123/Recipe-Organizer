@@ -17,7 +17,6 @@ export class ViewRecipesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.recipeService.getRecipes().subscribe((recipes) => {
       this.recipes = recipes;
-      console.log("local recipes from ngOnInit: ", recipes)
     },
     (error) => {
       alert("Error getting recipes from ngOnInit")

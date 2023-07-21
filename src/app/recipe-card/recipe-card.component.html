@@ -1,16 +1,4 @@
 <!-- This is the template for the recipe card component. -->
-<h1>Recipe Card</h1>
-<table>
-    <tr>
-        <td>Name</td>
-        <td>Description</td>
-        <td>Ingredients</td>
-        <td>Instructions</td>
-    </tr>
-    <tr>
-        <td>{{recipe.name}}</td>
-        <td>{{recipe.description}}</td>
-        <td>{{recipe.ingredients}}</td>
-        <td>{{recipe.instructions}}</td>
-    </tr>
-</table>
+<div class="card" (click)="onClickRecipe(recipe.id)">
+    <h2>{{recipe.name}}</h2>
+</div>

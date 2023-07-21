@@ -1,1 +1,20 @@
-<p>recipe-detail works!</p>
+<div class="recipe-details">
+    <h2>{{recipe.name}}</h2>
+    <div class="ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}}</li>
+        </ul>
+    </div>
+    <div class="instructions">
+        <h3>Instructions</h3>
+        <ol>
+        <li *ngFor="let instruction of recipe.instructions">{{instruction.description}}</li>
+        </ol>
+    </div>
+    <div class="buttons">
+        <button type="button" (click)="onFavourite()">Favourite</button>
+        <button type="button" (click)="onDelete()">Delete</button>
+        <button type="button" (click)="onEdit()">Edit</button>
+    </div>
+</div>

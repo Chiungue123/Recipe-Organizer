@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -9,7 +10,15 @@ import { Recipe } from '../recipe.model';
 export class RecipeCardComponent {
   // Input decorator allows us to pass data into this component
   @Input() recipe!: Recipe;
+
+  constructor(private router: Router) { }
+
   ngOnChanges() {
     console.log(this.recipe);
+  }
+
+  onClickRecipe(id: number) {
+    console.log("Navigating to recipe details. Id: ", id)
+    this.router.navigate(['/recipe', id]);
   }
 }
