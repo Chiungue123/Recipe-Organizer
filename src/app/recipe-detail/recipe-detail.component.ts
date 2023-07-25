@@ -11,9 +11,10 @@ import { Recipe, Ingredient, Instruction } from '../recipe.model';
 })
 export class RecipeDetailComponent implements OnInit{
   sub!: Subscription;
-  recipe: Recipe = new Recipe(0,'', [], []);
+  recipe: Recipe = new Recipe(0,'', '', [], []);
   
   id!: number;
+  image: string = "";
   name!: string;
   ingredients!: Ingredient[];
   instructions!: Instruction[];

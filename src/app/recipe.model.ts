@@ -1,6 +1,7 @@
 export class Recipe {
     constructor(
         public id: number,
+        public image: string,
         public name: string,
         public ingredients: Ingredient[], 
         public instructions: Instruction[]) 
