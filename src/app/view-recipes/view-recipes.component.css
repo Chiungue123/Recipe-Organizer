@@ -1,0 +1,23 @@
+.image-container{
+    top: 10vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: -1;
+    background-image: url("src/assets/image/view-recipes.jpeg");
+    background-size: cover; /* This will make sure your image always covers the whole screen */
+    background-repeat: no-repeat; /* This prevents the image from repeating */
+    background-position: center; /* Center the image horizontally and vertically */
+}
+
+.container {
+    padding: 0;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-gap: 10px; /* space between columns */
+    margin-top: 15vh;
+    height: 100%;
+    width: 85%;
+}

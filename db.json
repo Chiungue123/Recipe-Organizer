@@ -18,7 +18,11 @@
   },
   "recipes": [
     {
+      "favourite": true,
       "name": "Recipe Name",
+      "prepTime": "20 minutes",
+      "cookTime": "1 hour",
+      "servings": "3",
       "ingredients": [
         {
           "name": "Ingredient 1",
@@ -40,6 +44,48 @@
         }
       ],
       "id": 1
+    },
+    {
+      "favourite": false,
+      "name": "Pumpkin Pie",
+      "prepTime": "40 minutes",
+      "cookTime": "1 hour",
+      "servings": "5",
+      "ingredients": [
+        {
+          "name": "Pumpkin",
+          "amount": "3",
+          "unit": "cups"
+        },
+        {
+          "name": "Brown Sugar",
+          "amount": "2",
+          "unit": "cups"
+        },
+        {
+          "name": "Eggs",
+          "amount": "4",
+          "unit": "handfuls"
+        }
+      ],
+      "instructions": [
+        {
+          "description": "Preheat oven to 450F"
+        },
+        {
+          "description": "Combine ingredients, mixing thoroughly"
+        },
+        {
+          "description": "Pour ingredients into 2 pie molds"
+        },
+        {
+          "description": "Bake in oven for 40 minutes, insert toothpick. Should come out dry"
+        },
+        {
+          "description": "Let the pies cool for 15 minutes and enjoy"
+        }
+      ],
+      "id": 2
     }
   ]
 }

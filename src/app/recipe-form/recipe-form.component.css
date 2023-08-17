@@ -14,7 +14,7 @@
 }
 
 .viewport {
-    padding-top: 80px;
+    margin: 10vh 0vh;
     width: 800px;
     height: 700px;
     border-radius: 15px;
@@ -73,12 +73,22 @@ input, select {
     border-radius: 5px;
 }
 
-h2 {
+input:focus {
+    outline: none;
+}
+
+h2, h3{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 60px;
+    font-size: 40px;
     font-weight: bold;
     margin: 20px;
+}
+
+h3 {
+    font-size: 30px;
+    padding: 20px 0px 5px 20px;
+    margin: 0;
 }
 
 button {
@@ -105,7 +115,7 @@ button:hover{
         transform: translateY(0px);
     }
     50%{
-        transform: translateY(-5px);
+        transform: translateY(-3px);
     }
     100%{
         transform: translateY(0px);

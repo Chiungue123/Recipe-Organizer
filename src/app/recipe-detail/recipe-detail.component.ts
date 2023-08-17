@@ -11,8 +11,9 @@ import { Recipe, Ingredient, Instruction } from '../recipe.model';
 })
 export class RecipeDetailComponent implements OnInit{
   sub!: Subscription;
-  recipe: Recipe = new Recipe(0,'', '', [], []);
+  recipe: Recipe = new Recipe(false, 0, 0, 0, 0,'', '', [], []);
   
+  favourite!: boolean;
   id!: number;
   image: string = "";
   name!: string;
@@ -22,11 +23,10 @@ export class RecipeDetailComponent implements OnInit{
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit() {
-    console.log("Initializing recipe-detail component")
+    console.log("Recipe Detail ngOnInit called")
     this.sub = this.route.params.subscribe(
       (params: any) => {
         this.id = +params['id']; // The '+' sign converts the string to a number
-        console.log("Id: ", this.id)
       },
       (error: any) => {
         console.log("Error getting recipe details from ngOnInit")
@@ -36,7 +36,8 @@ export class RecipeDetailComponent implements OnInit{
 
      this.sub = this.recipeService.getRecipe(this.id).subscribe((recipe: Recipe) => {
         this.recipe = recipe;
-        console.log("Extracted recipe from recipe-detail: ", recipe["name"])
+        //console.log("Favourite = ", recipe["favourite"]);
+        this.favourite = recipe["favourite"];
      });
   }
 
@@ -44,16 +45,35 @@ export class RecipeDetailComponent implements OnInit{
     this.sub.unsubscribe();
   }
 
-  onEdit() {
+  onUpdate() {
     console.log("Editing recipe with id: ", this.id)
   }
 
-  onDelete() {
+  onDelete(id: number) {
+    if (!confirm("Are you sure you want to delete this recipe?")) {
+      return;
+    }
+    else{
+      alert("Deleting recipe with id: " + id)
+    }
     console.log("Deleting recipe with id: ", this.id)
+    this.recipeService.deleteRecipe(id).subscribe(() => {
+      this.recipeService.getRecipes().subscribe((recipes: Recipe[]) => {
+        this.recipeService.setRecipes(recipes);
+      });
+    });
   }
 
-  onFavourite(){
-    console.log("Favorite recipe with id: ", this.id)
+  onFavourite(id: number){
+    const recipe = this.recipeService.getRecipe(id).subscribe(recipe => {
+      this.recipe = recipe
+      const favourite = recipe.favourite;
+      //console.log("onFavourite called, id: ", id , " Favourite: ", favourite)
+      this.recipeService.toggleFavourite(id, favourite).subscribe(updatedRecipe => {
+        this.recipe = updatedRecipe
+        //console.log("Favourite updated to: ", updatedRecipe.favourite)
+          this.favourite = updatedRecipe.favourite
+      })
+    });
   }
-
 }

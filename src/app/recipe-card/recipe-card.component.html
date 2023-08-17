@@ -1,4 +1,9 @@
 <!-- This is the template for the recipe card component. -->
-<div class="card" (click)="onClickRecipe(recipe.id)">
+
+<div [class.fade-in]="loading" [class.loaded]="!loading" class="card" (click)="onClickRecipe(recipe.id)">
     <h2>{{recipe.name}}</h2>
+    <div class="cook-time">
+        <img src="assets/image/clock.jpg" alt="A default image">
+        <p>Cook Time: {{recipe.cookTime}}</p>
+    </div>
 </div>

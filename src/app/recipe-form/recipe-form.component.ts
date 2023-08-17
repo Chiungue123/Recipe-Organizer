@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -30,7 +30,11 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Here we're creating a new FormGroup for the entire recipe.
     this.recipeForm = this.fb.group({
+      favourite: [false],
       name: ['', Validators.required],
+      prepTime: ['', Validators.required],
+      cookTime: ['', Validators.required],
+      servings: ['', Validators.required],
       ingredients: this.fb.array([this.onCreateIngredient()]),
       instructions: this.fb.array([this.onCreateInstruction()])
     });
@@ -38,17 +42,15 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
 
   onNext() {
     this.currentStep ++;
-    this.changeSlide("next");
   }
 
   onPrevious() {
     this.currentStep --;
-    this.changeSlide("previous");
   }
 
   changeSlide(direction: string) {
-    // Update translation of slides container
-    const slidesContainer = document.querySelector('.slides-container');
+    // Change slides
+    const slidesContainer = document.querySelector('.slides-container'); // Get the slides container
     const slideWidth = 800; // Width of individual slide
     console.log("Transform: ", `translateX(-${(this.currentStep - 1) * slideWidth}px)`);
     (slidesContainer as HTMLElement).style.transform = `translateX(-${(this.currentStep - 1) * slideWidth}px)`;
@@ -56,7 +58,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
 
   onCreateIngredient(): FormGroup {
   // Here we're creating a new FormGroup for a single ingredient.
-  // Each ingredient will have its own FormControl for 'name', 'amount', and 'unit
+  // Each ingredient will have its own FormControl for 'name', 'amount', and 'unit'
     return this.fb.group({
       name: ['', Validators.required],
       amount: ['', Validators.required],
@@ -99,11 +101,11 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // When the form is submitted, we're logging the form's current value.
-    console.log("Recipe Form Value: ", this.recipeForm.value);
+    // console.log("Recipe Form Value: ", this.recipeForm.value);
     this.sub = this.recipeService.addRecipe(this.recipeForm.value).subscribe(
       (recipe: Recipe) => {
         console.log("Adding Recipe: ", recipe);
+        this.recipeService.refreshData();
         this.router.navigate(['/view-recipes']);
       },
       (error: any) => {
@@ -113,6 +115,8 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   };
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.sub){
+      this.sub.unsubscribe();
+    }
   }
 }

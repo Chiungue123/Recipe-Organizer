@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Header</title>
-</head>
-<body>
+<div class="headerview">
   <div class="container">
-    <h1>Recipe Manager</h1>
+
+    <h1>My Recipes</h1>
     <div class="nav-bar">
-      <a routerLink="/view-recipes">View Recipes</a>
-      <a routerLink="/recipe-favourites">View Favourites</a>
-      <a routerLink="/recipe-form">Add Recipe</a>
+      <a routerLink="/view-recipes">Recipes</a>
+      <a routerLink="/recipe-favourites">Favourites</a>
+      <a routerLink="/recipe-form">Add</a>
     </div>
-    <div class="nav-search">
-      <input type="text" placeholder="Search">
-      <button type="button">Search</button>
+  
+    <div class="search-container">
+      <div class="input-container">
+        <input [formControl]="searchControl" placeholder="Search">
+        <ng-container *ngIf="filteredRecipes | async as data">
+          <div *ngFor="let recipe of data">
+            <p (click)="onClick(recipe.id)">{{recipe.name}}</p>
+          </div>
+        </ng-container>
+      </div>
+      <div class="button-container">
+        <button class="search-button">
+          <img src="assets/image/magnifying-glass.png" class="search-icon"/>
+        </button>
+      </div>
     </div>
   </div>
-</body>
+</div>

@@ -1,9 +1,11 @@
 <div class="recipe-details">
     <div class="image">
-        <img *ngIf="recipe.image !== ''; else defaultImage" [src]="recipe.image">
-        <ng-template #defaultImage>
-            <img src="src/assets/image/default.jpeg">
-        </ng-template>
+        <img src="assets/image/default.jpeg" alt="A default image">
+    </div>
+    <div class="details">
+        <p>Prep Time: {{recipe.prepTime}}</p>
+        <p>Cook Time: {{recipe.cookTime}}</p>
+        <p>Servings: {{recipe.servings}}</p>
     </div>
     <div class="content">
         <div class="ingredients">
@@ -11,21 +13,24 @@
             <hr>
             <h2>Ingredients</h2>
             <ul>
-            <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}}</li>
+                <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}}</li>
             </ul>
         </div>
         <hr>
         <div class="instructions">
             <h2 [ngStyle]="{'margin-top.px': 0, 'padding-top.px': 0}">Instructions</h2>
-            <ol>
-            <li *ngFor="let instruction of recipe.instructions">{{instruction.description}}</li>
-            </ol>
+            <hr>
+            <ul>
+                <li *ngFor="let instruction of recipe.instructions">{{instruction.description}}</li>
+            </ul>
         </div>
     </div>
     <div class="buttons">
-        <button type="button" (click)="onFavourite()">Favourite</button>
-        <button type="button" (click)="onDelete()">Delete</button>
-        <button type="button" (click)="onEdit()">Edit</button>
+        <button type="button" (click)="onFavourite(recipe.id)">
+            {{ recipe.favourite ? 'Unfavourite' : 'Favourite' }}
+        </button>
+        <button type="button" (click)="onDelete(recipe.id)">Delete</button>
+        <button type="button" (click)="onUpdate()">Update</button>
     </div>
 </div>
 
